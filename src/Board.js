@@ -17,6 +17,7 @@
         this.set('n', params.length);
       }
     },
+    // made some arbitrary changes
 
     rows: function() {
       return _(_.range(this.get('n'))).map(function(rowIndex) {
