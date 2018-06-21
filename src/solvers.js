@@ -17,46 +17,62 @@
 
 window.findNRooksSolution = function(n) {
   //make empty board(n)
-  let emptyBoard = new Board({n: n});
-  let counter = 0;
+  var start = new Date();
+  var emptyBoard = new Board({n: n});
+  var counter = 0;
   
   
   
   //create a helper function: takes a populated board and recursive counter
-  const recursiveRooks = function(board, callCount, prev, erase) {
+  const recursiveRooks = function(board, callCount, erase) {
     //iterate through row
-    for (let row = 0; row < n; row++) {
+    for (var row = 0; row < n; row++) {
       //iterate through columns
-      for (let col = 0; col < n; col++) {
+      for (var col = 0; col < n; col++) {
         // check if position is populated, proceed with loop
         if (board.get(row)[col] !== 0) { continue; }
-        
+   
         //store prevPosition row, col
         if (erase) {
           board.togglePiece(prev[0], prev[1]);
         }
+        
+        var prev = [row, col];
         
         //toggle position
         board.togglePiece(row, col);
         //check if counter is equal to n to stop recursion
         if (callCount < n) {
           //recursively call helper func with board argument and counter++
-          recursiveRooks(board, callCount++, [row, col], erase);
+          var erase = false;
+          var result = recursiveRooks(board, callCount + 1, erase);
+          if (result) {
+            return result;
+          }
         // check if valid board and return board
         } 
-        if (!board.hasAnyRooksConflicts()) {
+        // add callcount 3 check
+        if (!board.hasAnyRooksConflicts() && callCount === n) {
           return board.rows();
         }
         erase = true;
       }
     }
     //decrement counter
+    
+    // toggle prev
+    board.togglePiece(prev[0], prev[1]);
     callCount--;
   };
-  var solution = recursiveRooks(emptyBoard, 1, _, false);
+  // debugger;
+  var erase = false;
+  var solution = recursiveRooks(emptyBoard, 1, erase);
 
   // console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
   console.log(solution);
+  var end = new Date();
+  var runTime = end - start;
+  console.log(runTime);
   return solution;
 };
 
