@@ -62,14 +62,14 @@
     },
 
 
-/*
-         _             _     _
-     ___| |_ __ _ _ __| |_  | |__   ___ _ __ ___ _
-    / __| __/ _` | '__| __| | '_ \ / _ \ '__/ _ (_)
-    \__ \ || (_| | |  | |_  | | | |  __/ | |  __/_
-    |___/\__\__,_|_|   \__| |_| |_|\___|_|  \___(_)
+    /*
+             _             _     _
+         ___| |_ __ _ _ __| |_  | |__   ___ _ __ ___ _
+        / __| __/ _` | '__| __| | '_ \ / _ \ '__/ _ (_)
+        \__ \ || (_| | |  | |_  | | | |  __/ | |  __/_
+        |___/\__\__,_|_|   \__| |_| |_|\___|_|  \___(_)
 
- */
+     */
     /*=========================================================================
     =                 TODO: fill in these Helper Functions                    =
     =========================================================================*/
@@ -86,7 +86,9 @@
     hasAnyRowConflicts: function() {
       let rows = this.rows();
       for (let i = 0; i < rows.length; i++) {
-        if (this.hasRowConflictAt(i)) return true;
+        if (this.hasRowConflictAt(i)) {
+          return true;
+        }
       }
       return false; 
     },
@@ -115,7 +117,9 @@
     hasAnyColConflicts: function() {
       let columns = this.rows().length;
       for (let i = 0; i < columns; i++) {
-        if (this.hasColConflictAt(i)) return true;
+        if (this.hasColConflictAt(i)) {
+          return true;
+        }
       }
       return false;
     },
